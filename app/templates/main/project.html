@@ -115,6 +115,7 @@
                           <form action="/project/fileupload" method="POST" enctype="multipart/form-data">
                           <form action="/project/delete" method="POST" >
 
+
                           <td><input type="checkbox" name="check" value={{loop.index-1}} /></td>
                           <td>{{item.프로젝트명}}</td>
                           <td>{{item.플랫폼}} </td>
@@ -126,9 +127,9 @@
                           <td>{{item.리뷰계획}} </td>
                           <td>{{item.번들대표차종}} </td>
                           <td>{{item.비고}} </td>
-                          <td>{{item['1차리뷰']}} <input type='file' name = "1st_file" >  </td> 
-                          <td>{{item['2차리뷰']}} <input type='file' name = "2nd_file" >  </td>
-                          <td>{{item['3차리뷰']}} <input type='file' name = "3rd_file" >  </td>
+                          <td><a href = "/uploads/{{item['1차리뷰']}}" download>{{item['1차리뷰']}}</a> <input type='file' name = "1st_file" >  </td> 
+                          <td><a href = "/uploads/{{item['2차리뷰']}}" download>{{item['2차리뷰']}}</a> <input type='file' name = "2nd_file" >  </td>
+                          <td><a href = "/uploads/{{item['3차리뷰']}}" download>{{item['3차리뷰']}}</a> <input type='file' name = "3rd_file" >  </td>
                     </tr>
                       {% endfor %}
                       {% endif%}

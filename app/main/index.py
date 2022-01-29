@@ -1,11 +1,12 @@
 # file name : index.py
 # pwd : /project_name/app/main/index.py
-from flask import Blueprint, request, render_template, flash, redirect, url_for
+from flask import Blueprint, request, render_template, flash, redirect, url_for, send_from_directory
 from flask import current_app as current_app
 import pandas as pd
 from werkzeug.utils import secure_filename
 from app.module import dbModule
 import datetime
+import os
 
 
 main = Blueprint('main', __name__, url_prefix='/')
@@ -157,29 +158,34 @@ def upload_file():
                 if f1[int(i)].filename:
                     print("f1", f1[int(i)])
                     
-                    location = "/home/joker1251/Desktop/"+f1[int(i)].filename
-                    f1[int(i)].save("/home/joker1251/Desktop/"+secure_filename(f1[int(i)].filename))
+                    location = f1[int(i)].filename
+                    f1[int(i)].save("./app/uploads/"+secure_filename(f1[int(i)].filename))
                     sql = "UPDATE SWDR_DB.Project SET 1차리뷰 = '%s' WHERE 프로젝트명 = '%s'" %(location, all_data[all_data.index==int(i)]['프로젝트명'].values[0])
                     db_class.execute(sql)
                     log += sql +", "
                 
                 if f2[int(i)].filename:
                     print("f2", f2[int(i)])
-                    location = "/home/joker1251/Desktop/"+f2[int(i)].filename
-                    f2[int(i)].save("/home/joker1251/Desktop/"+secure_filename(f2[int(i)].filename))
+                    location = f2[int(i)].filename
+                    f2[int(i)].save("./app/uploads/"+secure_filename(f2[int(i)].filename))
                     sql = "UPDATE SWDR_DB.Project SET 2차리뷰 = '%s' WHERE 프로젝트명 = '%s'" %(location, all_data[all_data.index==int(i)]['프로젝트명'].values[0])
                     db_class.execute(sql)
                     log += sql +", "
                 
                 if f3[int(i)].filename:
                     print("f3", f3[int(i)])
-                    location = "/home/joker1251/Desktop/"+f3[int(i)].filename
-                    f3[int(i)].save("/home/joker1251/Desktop/"+secure_filename(f3[int(i)].filename))
+                    location = f3[int(i)].filename
+                    f3[int(i)].save("./app/uploads/"+secure_filename(f3[int(i)].filename))
                     sql = "UPDATE SWDR_DB.Project SET 3차리뷰 = '%s' WHERE 프로젝트명 = '%s'" %(location, all_data[all_data.index==int(i)]['프로젝트명'].values[0])
                     db_class.execute(sql)
                     log += sql +", "
                 
-                
     db_class.commit()
     render = select(log)            
     return render
+
+@main.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    uploads = os.path.join(current_app.root_path, "uploads")
+    print(uploads)
+    return send_from_directory(directory='uploads', path=filename)

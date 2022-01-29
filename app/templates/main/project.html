@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://bootstrapk.com/examples/starter-template/# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="SoftWare Design Review">
+    <meta name="author" content="Sungwook Lee">
+    <link rel="icon" href="/static/system-file-manager_36030.ico">
+ 
+    <title>ACU</title>
+ 
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/static/css/starter-template.css" rel="stylesheet">
+ 
+  </head>
+ 
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+
+          </button>
+          <a class="navbar-brand" href="/">ACU SWDR</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/project" >프로젝트</a></li> 
+            <li><a href="/email">시스템메일</a></li> 
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+ 
+    <div class="container">
+      <p class="starter-template">  
+        <hr style="border: solid 1px gray;">
+        <li> 1. 첫번째 테이블에서 프로젝트의 기본 정보를 기입하고 '테이블에 넣기'를 눌러주세요. </li>
+        
+        <br>
+        <table class="table table-bordered table-condensed">
+          <tbody>
+                  <th> 프로젝트명 </th>
+                  <th> 플랫폼 </th>
+                  <th> 양산일 </th>
+                  <th> 담당자 </th>
+                  <th> 업체 </th>
+                  <th> 모델 </th>
+                  <th> 진행율 </th>
+                  <th> 리뷰계획 </th>
+                  <th> 번들대표차종 </th>
+                  <th> 비고 </th>
+              <tr>
+                <form action="/project/insert" method="POST">
+                  <td><input type="text" class="form-control" name="프로젝트명"/></td>
+                  <td><input type="text" class="form-control" name="플랫폼"/></td>
+                  <td><input type="date" class="form-control" name="양산일" value='2020-01-01'/></td>
+                  <td><input type="text" class="form-control" name="담당자"/></td>
+                  <td><input type="text" class="form-control" name="업체"/></td>
+                  <td><input type="text" class="form-control" name="모델"/></td>
+                  <td><input type="number" class="form-control" name="진행율" readonly/></td>
+                  <td><input type="date" class="form-control" name="리뷰계획" readonly/></td>
+                  <td><input type="text" class="form-control" name="번들대표차종"/></td>
+                  <td><input type="text" class="form-control" name="비고"/></td>
+              </tr>
+          </tbody>
+      </table>
+        <center><input type="submit" value="테이블에 넣기" ></center>
+                </form>
+      </p>  
+      
+
+
+      <p class="starter-template">  
+        <hr style="border: solid 1px gray;">
+        <li> 2. 입력한 양산일을 기준으로 리뷰계획은 '(양산일-80Day)'로 계산되고, 일정에 따라 담당자에게 '메일'이 송부될 거예요. </li>
+        <li> 3. 두번째 테이블에서 단계별 SWDR 산출물을 일정에 따라 제출해주세요. </li>
+        <li> 4. 제출한 산출물을 기준으로 현재 SWDR 수행 진행 상태를 모니터링할 수 있어요. </li>
+        <li> 5. 정렬이 되어있는 상태에선 저장이 불가해요, '다시 불러오기' 실행 후 저장해주세요. </li>
+        <li> 6. 정렬이 되어있는 상태에선 삭제가 불가해요, '다시 불러오기' 실행 후 삭제해주세요. </li>
+        <br>
+            <div class="table-responsive">
+              <table class="table table-bordered" id = "projectsdata">
+                <thead>
+                  <tr>
+                    <th> </check></th>
+                    <th>프로젝트명<check onclick="sortTD ( 1 )">▲</check><check onclick="reverseTD ( 1 )">▼</check> </th>
+                    <th>플랫폼<check onclick="sortTD ( 2 )">▲</check><check onclick="reverseTD ( 2 )">▼</check></th>
+                    <th>양산일<check onclick="sortTD ( 3 )">▲</check><check onclick="reverseTD ( 3 )">▼</check></th>
+                    <th>담당자<check onclick="sortTD ( 4 )">▲</check><check onclick="reverseTD ( 4 )">▼</check></th>
+                    <th>업체<check onclick="sortTD ( 5 )">▲</check><check onclick="reverseTD ( 5 )">▼</check></th>
+                    <th>모델<check onclick="sortTD ( 6 )">▲</check><check onclick="reverseTD ( 6 )">▼</check></th>
+                    <th>진행율<check onclick="sortTD ( 7 )">▲</check><check onclick="reverseTD ( 7 )">▼</check></th>
+                    <th>리뷰계획<check onclick="sortTD ( 8 )">▲</check><check onclick="reverseTD ( 8 )">▼</check></th>
+                    <th>번들대표차종<check onclick="sortTD ( 9 )">▲</check><check onclick="reverseTD ( 9 )">▼</check></th>
+                    <th>비고<check onclick="sortTD ( 10 )">▲</check><check onclick="reverseTD ( 10 )">▼</check></th>
+                    <th>1차리뷰</th>
+                    <th>2차리뷰</th>
+                    <th>3차리뷰</th>
+                  </tr>
+                </thead>
+                <tbody>
+                      {% if resultData is not none %}   
+                      {% for item in resultData %}
+                    <tr>
+                          <form action="/project/fileupload" method="POST" enctype="multipart/form-data">
+                          <form action="/project/delete" method="POST" >
+
+                          <td><input type="checkbox" name="check" value={{loop.index-1}} /></td>
+                          <td>{{item.프로젝트명}}</td>
+                          <td>{{item.플랫폼}} </td>
+                          <td>{{item.양산일}} </td>
+                          <td>{{item.담당자}} </td>
+                          <td>{{item.업체}} </td>
+                          <td>{{item.모델}} </td>
+                          <td>{{item.진행율}}% </td>
+                          <td>{{item.리뷰계획}} </td>
+                          <td>{{item.번들대표차종}} </td>
+                          <td>{{item.비고}} </td>
+                          <td>{{item['1차리뷰']}} <input type='file' name = "1st_file" >  </td> 
+                          <td>{{item['2차리뷰']}} <input type='file' name = "2nd_file" >  </td>
+                          <td>{{item['3차리뷰']}} <input type='file' name = "3rd_file" >  </td>
+                    </tr>
+                      {% endfor %}
+                      {% endif%}
+                </tbody>
+              </table>
+              <center>
+                <input type="button" value="다시 불러오기" onclick="location.href='/project/select'">
+                <input type="submit" value="선택목록 저장" formaction="/project/fileupload">
+                <input type="submit" value="선택목록 지우기" formaction="/project/delete">
+
+            </form>
+          </form>
+
+              </center>
+            </div>
+       </p>
+
+
+       <br>
+       <br>
+       <p style="text-align: right;">{{log}}</p>
+
+ 
+    </div><!-- /.container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/tablesort.js"></script>
+
+    <script type="text/javascript">
+      var myTable = document.getElementById( "projectsdata" ); 
+      var replace = replacement( myTable ); 
+      function sortTD( index ){replace.ascending( index );} 
+      function reverseTD( index ){replace.descending( index );} 
+    </script>
+
+
+</body></html>

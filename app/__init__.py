@@ -42,7 +42,7 @@ def email_test():
 def send_email(senders, receiver, content):
     try:
         mail = Mail(app)
-        msg = Message('자동메일: 우하하하하핫', sender = senders, recipients = receiver)
+        msg = Message('SWDR시스템 자동메일', sender = senders, recipients = receiver)
         msg.body = content
         mail.send(msg)
     except Exception:

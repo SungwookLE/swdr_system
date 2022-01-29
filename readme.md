@@ -8,5 +8,5 @@
   - schema: `SWDR_DB`
   - table: `Project`
 
-## 2. 결과
+## 3. 결과
 ![gif](./swdr_system.gif)
